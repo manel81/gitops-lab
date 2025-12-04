@@ -9,13 +9,16 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: matomo
-    targetRevision: 11.0.0   # puedes usar latest
+    targetRevision: 11.0.0
     helm:
       values: |
-        service:
-          type: ClusterIP
-        ingress:
-          enabled: false
+        global:
+          imageRegistry: registry.bitnami.com
+        mariadb:
+          image:
+            registry: registry.bitnami.com
+        image:
+          registry: registry.bitnami.com
 
   destination:
     server: https://kubernetes.default.svc
@@ -25,3 +28,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
