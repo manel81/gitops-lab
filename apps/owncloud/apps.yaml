@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: owncloud
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: oci://registry-1.docker.io/bitnamicharts
+    chart: owncloud
+    targetRevision: 12.2.11
+    helm:
+      values: |
+        global:
+          imageRegistry: registry.bitnami.com
+        
+        ingress:
+          enabled: false
+
+        service:
+          type: ClusterIP
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: owncloud
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - HelmOCI=true
