@@ -6,10 +6,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: kubernetes.local
+  - host: nginx.kubernetes.local
     http:
       paths:
-      - path: /pepe
+      - path: /
         pathType: Prefix
         backend:
           service:
