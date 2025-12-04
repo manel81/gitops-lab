@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: git@github.com:manel81/gitops-lab.git
     targetRevision: HEAD
-    path: cluster/apps
+    path: apps
 
   destination:
     server: https://kubernetes.default.svc
