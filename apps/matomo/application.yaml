@@ -9,16 +9,20 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: matomo
-    targetRevision: 11.0.0
+    targetRevision: 13.3.3
     helm:
       values: |
         global:
           imageRegistry: registry.bitnami.com
+
+        image:
+          registry: registry.bitnami.com
+          repository: bitnami/matomo
+
         mariadb:
           image:
             registry: registry.bitnami.com
-        image:
-          registry: registry.bitnami.com
+            repository: bitnami/mariadb
 
   destination:
     server: https://kubernetes.default.svc
