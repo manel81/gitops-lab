@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: matomo
-    targetRevision: 12.0.2   # puedes usar latest
+    targetRevision: 11.0.0   # puedes usar latest
     helm:
       values: |
         service:
