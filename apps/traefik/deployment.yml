@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  project: default
+
+  source:
+    repoURL: https://traefik.github.io/charts
+    chart: traefik
+    targetRevision: 27.0.2   # Usa la versión estable actual
+    helm:
+      values: |
+        deployment:
+          replicas: 1
+
+        ingressClass:
+          enabled: true
+          isDefaultClass: true
+          name: traefik
+
+        ports:
+          web:
+            exposedPort: 80
+          websecure:
+            exposedPort: 443
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
