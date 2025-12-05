@@ -13,7 +13,7 @@ spec:
     helm:
       values: |
         deployment:
-          replicas: 1
+          replicas: 10
 
         ingressClass:
           enabled: true
