@@ -24,7 +24,7 @@ spec:
           web:
             exposedPort: 80
           websecure:
-            exposedPort: 443
+            exposedPort: 4443
 
   destination:
     server: https://kubernetes.default.svc
