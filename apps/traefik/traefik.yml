@@ -13,7 +13,7 @@ spec:
     helm:
       values: |
         deployment:
-          replicas: 10
+          replicas: 1
 
         ingressClass:
           enabled: true
@@ -22,7 +22,7 @@ spec:
 
         ports:
           web:
-            exposedPort: 80
+            exposedPort: 8080
           websecure:
             exposedPort: 4443
 
