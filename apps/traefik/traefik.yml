@@ -9,22 +9,33 @@ spec:
   source:
     repoURL: https://traefik.github.io/charts
     chart: traefik
-    targetRevision: 27.0.2   # Usa la versión estable actual
+    targetRevision: 27.0.2
+
     helm:
       values: |
-        deployment:
-          replicas: 1
+        # Habilita el provider para Ingress nativos de Kubernetes
+        additionalArguments:
+          - "--providers.kubernetesingress=true"
 
+        # Traefik será la IngressClass por defecto
         ingressClass:
           enabled: true
           isDefaultClass: true
           name: traefik
 
+        # Configuración de puertos dentro del cluster
         ports:
           web:
-            exposedPort: 8080
+            port: 80          # Puerto interno del Service
+            exposedPort: 80   # Puerto expuesto dentro del cluster
+            targetPort: 8000  # Puerto del pod Traefik (entrypoint web)
+            expose: true
+
           websecure:
-            exposedPort: 4443
+            port: 443
+            exposedPort: 443
+            targetPort: 8443  # Puerto del pod Traefik (entrypoint websecure)
+            expose: true
 
   destination:
     server: https://kubernetes.default.svc
